@@ -1,0 +1,33 @@
+# Next.js
+.next/
+out/
+
+# Node.js
+node_modules/
+
+# Environment files
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# IDE
+.vscode/
+.idea/
+
+# Build artifacts
+*.log
+*.pid
+
+# Dependencies
+yarn.lock
+pnpm-lock.yaml
+
+# Coverage
+coverage/
+
+# Misc
+.DS_Store
+*.swp
+*.swo
