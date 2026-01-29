@@ -4,6 +4,11 @@ An interactive web application that replaces PDF documents with a searchable, st
 
 ## Features
 
+### Landing Flow
+- Language selection (Cymraeg coming soon)
+- Role selection (Prospective candidate coming soon)
+- Existing Councillor path routes to the current web app
+
 ### PDF Viewer
 - View both "100 Tips for Councillors" and "Being a Councillor" documents
 - Navigate between pages with Previous/Next buttons
@@ -64,7 +69,8 @@ public/
 └── favicon.ico                  # Site icon
 
 pages/
-├── index.js                    # PDF viewer page
+├── index.js                    # Landing page (language + role selection)
+├── viewer.js                   # PDF viewer page
 ├── 100tips.js                   # Structured tips page
 ├── _app.js                      # App wrapper
 └── _document.js                # Global HTML template
