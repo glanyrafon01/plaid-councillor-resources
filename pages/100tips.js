@@ -69,7 +69,7 @@ export default function HundredTips() {
       </div>
       
       <div className="tips-count">
-        Showing {filteredTips.length} of {categoryTips.length} tips in "{selectedCategory}"
+        Showing {filteredTips.length} of {categoryTips.length} tips in &quot;{selectedCategory}&quot;
       </div>
       
       <div className="tips-list">

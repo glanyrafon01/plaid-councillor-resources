@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 
 export default function Home() {
@@ -142,9 +143,12 @@ export default function Home() {
         </div>
         
         <div className="pdf-display">
-          <img 
+          <Image
             src={`/ocr_output/${currentPdf === '100Tips' ? '100tips_images' : 'councillor_images'}-00${currentPage}.jpg`}
             alt={`${currentPdf} page ${currentPage + 1}`}
+            width={2480}
+            height={3508}
+            sizes="(max-width: 800px) 100vw, 800px"
             style={{ width: '100%', height: 'auto', maxWidth: '800px', margin: '0 auto', display: 'block' }}
             onError={(e) => {
               console.error('Error loading image:', e.target.src)
