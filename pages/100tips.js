@@ -50,7 +50,8 @@ export default function HundredTips() {
       </div>
 
       <div className="main-navigation" role="tablist" aria-label="Content sections">
-        <Link href="/" className="tab">PDF Viewer</Link>
+        <Link href="/" className="tab ghost">Change Selection</Link>
+        <Link href="/viewer" className="tab">PDF Viewer</Link>
         <Link href="/100tips" className="tab active" aria-current="page">100 Tips (Structured)</Link>
       </div>
       
@@ -195,8 +196,18 @@ export default function HundredTips() {
           background: #eef3f0;
         }
 
+        .tab.ghost {
+          background: transparent;
+          border: 1px solid #d3dfd8;
+          color: #2b3a34;
+        }
+
         .tab:hover {
           background: #e2ece7;
+        }
+
+        .tab.ghost:hover {
+          background: #f3f7f4;
         }
 
         .tab.active {
