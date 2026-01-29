@@ -32,9 +32,26 @@ export default function HundredTips() {
   
   return (
     <div className="tips-container">
-      <div className="page-header">
-        <h1>100 Tips for Effective Councillors</h1>
-        <Link href="/" className="back-link">← Back to PDF Viewer</Link>
+      <div className="hero">
+        <div>
+          <h1>100 Tips for Effective Councillors</h1>
+          <p className="hero-subtitle">Browse the curated advice by theme, scan quickly, and expand when you need the detail.</p>
+        </div>
+        <div className="hero-stats">
+          <div>
+            <span className="stat-label">Total tips</span>
+            <span className="stat-value">{allTips.length}</span>
+          </div>
+          <div>
+            <span className="stat-label">Categories</span>
+            <span className="stat-value">{Object.keys(tipsData).length}</span>
+          </div>
+        </div>
+      </div>
+
+      <div className="main-navigation" role="tablist" aria-label="Content sections">
+        <Link href="/" className="tab">PDF Viewer</Link>
+        <Link href="/100tips" className="tab active" aria-current="page">100 Tips (Structured)</Link>
       </div>
       
       <div className="tips-controls">
@@ -74,7 +91,10 @@ export default function HundredTips() {
       
       <div className="tips-list">
         {filteredTips.length === 0 ? (
-          <div className="no-results">No tips found matching your search.</div>
+          <div className="no-results">
+            <div className="no-results-title">No tips found</div>
+            <div>Try a shorter phrase or switch to another category.</div>
+          </div>
         ) : (
           filteredTips.map(tip => (
             <div key={tip.number} className="tip-item">
@@ -82,7 +102,7 @@ export default function HundredTips() {
                 className="tip-header"
                 onClick={() => toggleTipExpansion(tip.number)}
               >
-                <span className="tip-number">Tip {tip.number}</span>
+                <span className="tip-number">#{tip.number}</span>
                 <span className="tip-preview">{tip.text.substring(0, 100)}{tip.text.length > 100 ? '...' : ''}</span>
                 <span className="expand-icon">{expandedTip === tip.number ? '−' : '+'}</span>
               </div>
@@ -106,27 +126,88 @@ export default function HundredTips() {
       </div>
       
       <style jsx>{`
+        :global(body) {
+          background: radial-gradient(circle at top, #f3f7f4 0%, #ffffff 45%, #f8faf6 100%);
+        }
+
+        .hero {
+          display: flex;
+          justify-content: space-between;
+          gap: 20px;
+          align-items: center;
+          background: linear-gradient(135deg, #ffffff 0%, #eef5f1 100%);
+          border: 1px solid #e5ece8;
+          border-radius: 16px;
+          padding: 24px;
+          box-shadow: 0 12px 30px rgba(20, 41, 35, 0.08);
+        }
+
+        .hero h1 {
+          margin: 0 0 8px 0;
+          font-size: 2.1rem;
+          letter-spacing: -0.02em;
+        }
+
+        .hero-subtitle {
+          margin: 0;
+          color: #44524c;
+          font-size: 1.02rem;
+          line-height: 1.6;
+        }
+
+        .hero-stats {
+          display: grid;
+          gap: 10px;
+          background: #f9fbfa;
+          border: 1px solid #e1e9e4;
+          border-radius: 12px;
+          padding: 16px 18px;
+          min-width: 160px;
+        }
+
+        .stat-label {
+          display: block;
+          color: #5a6b63;
+          font-size: 0.85rem;
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
+        }
+
+        .stat-value {
+          display: block;
+          font-size: 1.5rem;
+          font-weight: 700;
+          color: #1f6b4f;
+        }
+
+        .main-navigation {
+          display: flex;
+          gap: 12px;
+          margin: 24px 0 16px 0;
+        }
+
+        .tab {
+          color: #1d2e28;
+          text-decoration: none;
+          font-weight: 600;
+          padding: 8px 16px;
+          border-radius: 999px;
+          background: #eef3f0;
+        }
+
+        .tab:hover {
+          background: #e2ece7;
+        }
+
+        .tab.active {
+          color: #ffffff;
+          background: #1f6b4f;
+        }
+
         .tips-container {
           max-width: 1200px;
           margin: 0 auto;
           padding: 20px;
-        }
-        
-        .page-header {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-bottom: 20px;
-        }
-        
-        .back-link {
-          color: #0070f3;
-          text-decoration: none;
-          font-size: 0.9em;
-        }
-        
-        .back-link:hover {
-          text-decoration: underline;
         }
         
         .tips-controls {
@@ -148,12 +229,14 @@ export default function HundredTips() {
           border-radius: 20px;
           font-size: 0.9em;
           white-space: nowrap;
+          border: 1px solid #d3dfd8;
+          background: #f2f6f4;
         }
         
         .category-selector button.active {
-          background-color: #0070f3;
+          background-color: #1f6b4f;
           color: white;
-          border-color: #0070f3;
+          border-color: #1f6b4f;
         }
         
         .search-box {
@@ -176,9 +259,9 @@ export default function HundredTips() {
         }
         
         .tips-count {
-          color: #666;
-          font-size: 0.9em;
-          margin: 10px 0;
+          color: #5a6b63;
+          font-size: 0.95em;
+          margin: 14px 0;
         }
         
         .tips-list {
@@ -190,7 +273,7 @@ export default function HundredTips() {
           border: 1px solid #e0e0e0;
           border-radius: 8px;
           overflow: hidden;
-          box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+          box-shadow: 0 8px 18px rgba(20, 41, 35, 0.08);
         }
         
         .tip-header {
@@ -207,9 +290,13 @@ export default function HundredTips() {
         }
         
         .tip-number {
-          font-weight: bold;
-          color: #0070f3;
+          font-weight: 700;
+          color: #1f6b4f;
           min-width: 60px;
+          background: #e5f3ec;
+          border-radius: 999px;
+          padding: 6px 12px;
+          text-align: center;
         }
         
         .tip-preview {
@@ -246,19 +333,39 @@ export default function HundredTips() {
           padding: 6px 12px;
           font-size: 0.85em;
           background-color: #f0f0f0;
+          border-radius: 999px;
         }
         
         .no-results {
           padding: 40px;
           text-align: center;
-          color: #666;
-          font-style: italic;
+          color: #53625b;
+          background: #f2f6f4;
+          border-radius: 12px;
+          border: 1px dashed #c7d8cf;
+        }
+
+        .no-results-title {
+          font-weight: 700;
+          color: #1f6b4f;
+          margin-bottom: 6px;
         }
         
         .loading {
           padding: 40px;
           text-align: center;
           font-size: 1.2em;
+        }
+
+        @media (max-width: 900px) {
+          .hero {
+            flex-direction: column;
+            align-items: flex-start;
+          }
+
+          .hero-stats {
+            width: 100%;
+          }
         }
       `}</style>
     </div>
